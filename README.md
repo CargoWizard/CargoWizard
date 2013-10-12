@@ -9,7 +9,14 @@ CargoWizard
 - Ondra Heřmánek (ondra.hermanek@gmail.com)
 
 # Mission #
-Cilem je vytvorit software, ktery bude firme zabyvajici se autodopravou resit beznou agendu. Tedy spravovat vozovy park a seznam zamestancu (ridicu), dale pak poskytovat sluzbu automatickeho dispecera, zadavat trasy jednotlivym autum a snazit se je nejak optimalizovat. Trasy bude centralni dispecink posilat primo autum do navigace. A v neposledni rade bude k dispozici rozhrani pro zadavani novych zakazek (nejspis web), to budou moct puzivat jak koncovi klienti, tak treba operatori zvedajici telefony.
+Cílem je vytvořit software, který bude firmě zabývající se autodopravou řešit
+běžnou agendu. Bude spravovat vozový park a seznam zaměstnanců (řidičů), dále
+pak poskytovat službu automatického dispečera (resp. v jazyce logistiky -
+"disponenta"), tedy bude přidělovat trasy jednotlivým autům a snažit se
+optimalizovat jejich vytížení. Trasy bude cetrální dispečink posílat autům
+přímo do navigace. V neposlední řadě bude k dispozici webové rozhraní pro 
+zadávaní nových zakázek, které budou moct využívat jakt koncoví klienti, tak i
+operátoři přijímající zakázky po telefonu.                              
 
 # Links #
 - [Google docs](https://docs.google.com/document/d/1ymMX19y3kHfJ77xJQ8NDcDHS1yBCDHuWDSaOqpiZZCQ/edit)
