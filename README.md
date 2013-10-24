@@ -21,3 +21,4 @@ operátoři přijímající zakázky po telefonu.
 # Links #
 - [Google docs](https://docs.google.com/document/d/1ymMX19y3kHfJ77xJQ8NDcDHS1yBCDHuWDSaOqpiZZCQ/edit)
 - [Github - repository](https://github.com/CargoWizard/CargoWizard)
+- [Úkol #1 - word](https://docs.google.com/document/d/1hhc5ENNz3EX5S1nfaCkJaf00M6cgT_wNNvw37Q_9sSM/edit?usp=sharing)
