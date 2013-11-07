@@ -1,0 +1,73 @@
+Popis architektury systému CargoWizard
+--------------------------------------
+
+Celý systém se skládá ze tří aplikací - CoreApp, On-boardApp a WebInterface.
+Kažadá má vlastní architekturu.
+
+WebInterface
+------------
+
+Webové rozhraní je založené na návrhovém vzoru Model-View-Controller. Model
+využívá core modul Core::DB_Accesor (TODO: změnit, až se rozhodnem pro jméno), jehož
+prostřednictvím získává a modifikuje data z centrální databáze (stylistika!).
+
+Controller řídí logiku celé aplikace, stará se o přihlašování užívatelů,
+identifikuje jejich role v systému (zákazník, operátor, manažer) a obsluhuje
+jejich požadavky. Z modelu získává data a skrze jednotlivé pohledy (Views)
+posílá klientům konkrétní webové stránky.
+
+CoreApp
+-------
+
+Jádro systému je tvořené několika moduly. Core::Scheduler je modul, který realizuje
+vlastní plánování tras. Skrze rozhraní Core::SchedulerPolicy je parametrizovaný
+plánovací politikou, která způsob a jeho rozhodování. 
+
+Dalším modulem je Core::DB_Accessor, který zpřstupňuje ostatním modulům
+databázi, tím garantuje, že DB bude modifikována pouze definovaným způsobem
+skrze jeho rozhraní.  
+
+Modul Core::RouteFinder je modul dodaný externí firmou, který ze zadaných adres
+spočítá trasu.
+
+Core::Gateway je modul pro komunikaci s On-board aplikacemi. Aplikacím posílá
+informace o zakázkách a trasách, a od aplikací přijímá aktuální pozice vozidel
+a potvrezní doručených zakázek. Data ukládá do databáze.
+
+Klíčovým modulem Core systému je Core::Controller (navzdory jménu zde není na
+MVC kladen takový důraz jako v případě WebInterface), který řídí chování celého
+jádra. Přostřednictvím modulu Core::DB_Accesor komunikuje s databázovým
+serverem, reaguje na nově zadané zakázky a zadává je plánovači k vyřešení.
+Naplánované zakázky předává nejprve Core::RouteFinderu kvůli spočítání přesné
+trasy a posléze informuje Core::Gateway, aby poslada data konkrétním autům.
+
+Databázový systém je také považován za součást core systému. Nad DB zakázek
+jsou triggery, které informují Core::Controller o přidání nových zakázek.
+Součástí DBS je i modul, který nad daty v DB provádí statistické a analytické
+výpočty, jejichž výsledky ukládá opět do DB.,
+
+
+Poznámky & ToDo's:
+------------------
+
+- jsou věci typu SSL součástí popisu architektury? asi jo
+
+- uz jsem mozna prisel na to jak oddelovat staticky moduly a runtime
+  komponenty: vzdy je dobry se zeptat, co to vlastne je? Je to knihovna nebo je
+  to aplikace/sluzba, ktera nekde realne bezi? Napr CoreController je urcite
+  runtime komponenta, ale soucasti jeji architektury je nejaky modul pro praci
+  s databazi. Tedy napr. pristup webserveru k databazi se da resit dvema
+  zpusoby:
+    - bud se pokazdy dotazovat Core::Controlleru jako sluzby, dej mi ty a ty data
+    - nebo pouzit prave ten staticky modul (knihovnu), ktery Controller
+      vyuziva, rovnou v kodu webserveru
+
+  V pripade toho webserveru, bych preferoval tu druhou variantu, tedy webserver
+  nebude porad otravovat core, ze chce nejaka data, jenom pak chce zajistit,
+  aby kdyz se do DB vlozi nova zakazka, aby se o tom core nejak dozvedel a
+  nemusel se o to aktivne zajimat, to se da resit nejakym triggerem rovnou v
+  tom DBMS
+
+
+- Scheduler: neměl by mít k dispozici Core::RouteFinder rovnou?
+
