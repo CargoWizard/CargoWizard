@@ -35,16 +35,98 @@
         <h2> <a name="team" class="anchor" href="#team"><span class="octicon
                     octicon-link"></span></a>Logical View</h2>
 
-        <h2> <a name="team" class="anchor" href="#team"><span class="octicon
-                    octicon-link"></span></a>Component View</h2>
+        <p>Logický pohled nabízí zobrazení zákaldní dekompozice celého systému.</p>
 
-        <p>this is some paragrap here...</p>
+        <img src="images/decomp.png"/>
+
+<h3>WebInterface</h3>
+<p> Webová aplikace umožňuje uživatelům komunikaci se systémem. Je postavena na
+návrhovém vzoru model-view-controller. Skrze jednotlivé pohledy poskytuje
+uživatelům data podle jejich rolí. Tedy zákazníkům poskytuje možnost zadávat
+nové objedávky a prohlíže ty staré. Operátorům poskytuje rozhraní pro zadávní a
+editaci objednávek a zobrazuje informace o zákaznících. Manažerům webová
+aplikace zobrazuje statistické údaje o provozu firmy, o množství zakázek a
+rychlosti jejich provedení a v neposlední řadě aktuální polohu všech vozidel.
+</p>
+
+<p>
+WebAppController řídí logiku celé aplikace,
+stará se o přihlašování uživatelů, identifikuje jeich role a obsluhuje
+pozadvky. WebAppModel poskytuje controlleru data, která získává z core
+systému.
+</p>
+
+<h3>Core Sytem</h3>
+<p><b>Core</b> slouží jako backend celého sytému, komunikuje s oběma typu
+frontendů (tj. webovou a on-board aplikací) a zprostředková jim přístup do
+databáze. Dále obsahuje modul plánovače tras (Scheduler), kterému předává
+informace o zakázkách a od něj získává plán jejich odbavení. Ten pak předává
+Route Finderu, který už vrací konkrétní trasu. Činnost plánovače je možnost
+ovlivňovat výberem konkrétní plánovací politiky (SchedilingPolicy).</p>
+
+<p>
+Modul RouteFinder je dodaný externí firmou, která se zabývá vývojem navigačních
+systémů a má tedy přístup k detailním mapovým podkladům. Vlastní modul vyžaduje
+od systému typ vozidla a jeho aktuální polohu, sadu waypointů (míst s
+vyzvednutím či odevzdáním zásilky) a případná omezení na jejich pořadí. Na
+základě těchto údajů spočítá přesnou trasu. </p>
+
+<h3>On-board Application</h3>
+<p>Aplikace na zařízení komunikuje prostřednictvím zabezpečeného spojení s Core
+systémem. Především přijímá informace o zakázkách a zobrazuje je řidiči a
+od něj pak získává potvrzení o doručení. Dále dostává informace o trase,
+kterou má řidič jet, a tu zobrazuje prostřednictvím standardního navigačního
+programu v daném on-board zařízení. Posledním úkolem této aplikace je
+sledovat aktuální polohu vozidla a ve stanoveném intervalu ji posílat do
+systému.</p>
+
+        <h2> <a name="team" class="anchor" href="#team"><span class="octicon
+                    octicon-link"></span></a>Development View</h2>
+
+<p>Tento pohled na systém zobrazuje jeho jednotlivé komponenty a vazby
+mezi nimi.</p>
+
         <img src="images/ComponentModel.png"/>
 
-        <h2> <a name="test" class="anchor" href="#team"><span class="octicon
-                    octicon-link"></span></a>Deployment view</h2>
+<p>Popis většiny komponent odpovídá tomu, co bylo napsáno výše v rámci
+        logického pohledu. Jedině u databáze, byť je logicky brána jako
+        součást Core, nejsou uvedeny podrobnější informace. 
+</p>
 
-        <h2> <a name="test" class="anchor" href="#team"><span class="octicon
+<h3>Database</h3>
+
+<p>
+Databázový systém řídí manager schopný provozovat několik nezávislých
+databází zároveň. První databáze Clients_Orders obsahuje osobní informace o
+klientech a zároveň eviduje všechny zakázky a jejich stav.</p>
+
+<p>Databáze Employees_Trucks ukláda data o zaměstancích a eviduje jejch
+docházku. Dále pak udržuje informaci o jedntlivých vozidlech, o jejich stavu,
+najetých kilometrech, průměrné spotřebě a trasách, které absolvovaly. 
+</p>
+
+<p>Speciální význam má RouteDB, která uchovává dočasnou informaci o všech
+aktuálních trasách. Ukládá se do ní výstup z Route Finderu. Odtud se také berou
+ data trasy, která se posílají do On-board zařízení.</p>
+
+        <h2> <a name="test" class="anchor" href="#deploy"><span class="octicon
+                    octicon-link"></span></a>Deployment View</h2>
+
+<p>TODO: sem dat obrazek</p>
+
+    <h2> <a name="test" class="anchor" href="#usecase"><span class="octicon
+            octicon-link"></span></a>Process View</h2>
+
+    <p>TODO: vim, ze to neni soucasti tohohle ukolu, ale neco se jeste napisu</p>
+
+        <h2> <a name="test" class="anchor" href="#usecase"><span class="octicon
+                    octicon-link"></span></a>Use Case Model </h2>
+
+        <img src="images/use_case_model.png"/>
+
+<p>TODO: popsat ty akce u use casu?</p>
+
+        <h2> <a name="test" class="anchor" href="#refs"><span class="octicon
                     octicon-link"></span></a>Reference</h2>
 
         <p>[1] CargoWizard - Katalog požadavků</p> 
