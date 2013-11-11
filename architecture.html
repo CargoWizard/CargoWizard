@@ -26,24 +26,24 @@
       </div>
     </header>
 
-    <div class="container">
-      <section id="main_content">
-        <h1> <a name="cargowizard" class="anchor" href="#cargowizard"><span
-                    class="octicon octicon-link"></span></a>Popis architektury
-                    projektu CargoWizard</h1>
+<div class="container">
+<section id="main_content">
 
-        <h2> <a name="team" class="anchor" href="#team"><span class="octicon
-                    octicon-link"></span></a>Logical View</h2>
+<h1> <a name="cargowizard" class="anchor" href="#cargowizard">
+<span class="octicon octicon-link"></span></a>Popis architektury projektu CargoWizard</h1>
 
-        <p>Logický pohled nabízí zobrazení zákaldní dekompozice celého systému.</p>
+<h2> <a name="team" class="anchor" href="#team">
+<span class="octicon octicon-link"></span></a>Logical View</h2>
 
-        <img src="images/decomp.png"/>
+<p>Logický pohled nabízí zobrazení zákaldní dekompozice celého systému.</p>
+
+<img src="images/decomp.png"/>
 
 <h3>WebInterface</h3>
 <p> Webová aplikace umožňuje uživatelům komunikaci se systémem. Je postavena na
 návrhovém vzoru model-view-controller. Skrze jednotlivé pohledy poskytuje
 uživatelům data podle jejich rolí. Tedy zákazníkům poskytuje možnost zadávat
-nové objedávky a prohlíže ty staré. Operátorům poskytuje rozhraní pro zadávní a
+nové objednávky a prohlížet ty staré. Operátorům poskytuje rozhraní pro zadávání a
 editaci objednávek a zobrazuje informace o zákaznících. Manažerům webová
 aplikace zobrazuje statistické údaje o provozu firmy, o množství zakázek a
 rychlosti jejich provedení a v neposlední řadě aktuální polohu všech vozidel.
@@ -51,42 +51,43 @@ rychlosti jejich provedení a v neposlední řadě aktuální polohu všech vozi
 
 <p>
 WebAppController řídí logiku celé aplikace,
-stará se o přihlašování uživatelů, identifikuje jeich role a obsluhuje
-pozadvky. WebAppModel poskytuje controlleru data, která získává z core
+stará se o přihlašování uživatelů, identifikuje jejich role a obsluhuje
+požadavky. WebAppModel poskytuje controlleru data, která získává z core
 systému.
 </p>
 
 <h3>Core Sytem</h3>
-<p><b>Core</b> slouží jako backend celého sytému, komunikuje s oběma typu
+<p><b>Core</b> slouží jako backend celého sytému, komunikuje s oběma typy
 frontendů (tj. webovou a on-board aplikací) a zprostředková jim přístup do
 databáze. Dále obsahuje modul plánovače tras (Scheduler), kterému předává
 informace o zakázkách a od něj získává plán jejich odbavení. Ten pak předává
-Route Finderu, který už vrací konkrétní trasu. Činnost plánovače je možnost
-ovlivňovat výberem konkrétní plánovací politiky (SchedilingPolicy).</p>
+Route Finderu, který už vrací konkrétní trasu. Činnost plánovače je možné
+ovlivňovat výběrem konkrétní plánovací politiky (SchedulingPolicy).</p>
 
 <p>
 Modul RouteFinder je dodaný externí firmou, která se zabývá vývojem navigačních
 systémů a má tedy přístup k detailním mapovým podkladům. Vlastní modul vyžaduje
 od systému typ vozidla a jeho aktuální polohu, sadu waypointů (míst s
 vyzvednutím či odevzdáním zásilky) a případná omezení na jejich pořadí. Na
-základě těchto údajů spočítá přesnou trasu. </p>
+základě těchto údajů spočítá přesnou trasu. Modul garantuje, že trasa bude
+vyhovovat zadanému typu vozidla. </p>
 
 <h3>On-board Application</h3>
 <p>Aplikace na zařízení komunikuje prostřednictvím zabezpečeného spojení s Core
 systémem. Především přijímá informace o zakázkách a zobrazuje je řidiči a
 od něj pak získává potvrzení o doručení. Dále dostává informace o trase,
-kterou má řidič jet, a tu zobrazuje prostřednictvím standardního navigačního
+kterou má řidič jet, tu zobrazuje prostřednictvím standardního navigačního
 programu v daném on-board zařízení. Posledním úkolem této aplikace je
 sledovat aktuální polohu vozidla a ve stanoveném intervalu ji posílat do
 systému.</p>
 
-        <h2> <a name="team" class="anchor" href="#team"><span class="octicon
-                    octicon-link"></span></a>Development View</h2>
+<h2> <a name="team" class="anchor" href="#team">
+<span class="octicon octicon-link"></span></a>Development View</h2>
 
 <p>Tento pohled na systém zobrazuje jeho jednotlivé komponenty a vazby
 mezi nimi.</p>
 
-        <img src="images/ComponentModel.png"/>
+<img src="images/ComponentModel.png"/>
 
 <p>Popis většiny komponent odpovídá tomu, co bylo napsáno výše v rámci
         logického pohledu. Jedině u databáze, byť je logicky brána jako
@@ -109,27 +110,93 @@ najetých kilometrech, průměrné spotřebě a trasách, které absolvovaly.
 aktuálních trasách. Ukládá se do ní výstup z Route Finderu. Odtud se také berou
  data trasy, která se posílají do On-board zařízení.</p>
 
-        <h2> <a name="test" class="anchor" href="#deploy"><span class="octicon
-                    octicon-link"></span></a>Deployment View</h2>
+<h2> <a name="test" class="anchor" href="#deploy">
+<span class="octicon octicon-link"></span></a>Deployment View</h2>
 
 <p>TODO: sem dat obrazek</p>
 
-    <h2> <a name="test" class="anchor" href="#usecase"><span class="octicon
-            octicon-link"></span></a>Process View</h2>
+<h2> <a name="test" class="anchor" href="#usecase">
+<span class="octicon octicon-link"></span></a>Process View</h2>
 
-    <p>TODO: vim, ze to neni soucasti tohohle ukolu, ale neco se jeste napisu</p>
+<p>(TODO: je potřeba diagram aktivit)</p>
+<h2> <a name="test" class="anchor" href="#usecase">
+<span class="octicon octicon-link"></span></a>Use Case Model </h2>
 
-        <h2> <a name="test" class="anchor" href="#usecase"><span class="octicon
-                    octicon-link"></span></a>Use Case Model </h2>
+<img src="images/use_case_model.png"/>
 
-        <img src="images/use_case_model.png"/>
+<p>Následuje popis jednotlivých případů užití spolu s odkazy do Katalogu
+požadavků [1].</p>
 
-<p>TODO: popsat ty akce u use casu?</p>
+<h3>Phone Order</h3>
+<p>Zákazník volá do telefeonního centra kvůli zadání nové zakázky nebo úpravě
+parametrů staré. Operátor kontaktuje zákazníka ohledně výsledku potvrzení
+objednávky
+</br><b>Use Cases:</b> UC2 - UC8
+</p>
 
-        <h2> <a name="test" class="anchor" href="#refs"><span class="octicon
-                    octicon-link"></span></a>Reference</h2>
+<h3>Order Delivery</h3>
+<p>Zákazník zadává novou objednávku prostřednictím webového rozhraní. Systém
+posílá zákazníkovi potvrzení o objenávce či její změně.
+</br><b>Use cases:</b> UC1, UC2 - UC5
+</p>
 
-        <p>[1] CargoWizard - Katalog požadavků</p> 
+<h3>Change Delivery</h3>
+<p> Operátor mění parametry objednávky.
+</br><b>Use cases:</b> UC6 UC7
+</p>
+
+<h3>Request Statistics</h3>
+<p> Manažer prostřednictvím webového rozhraní požádá o zobrazení statických dat.
+</br><b>Use cases:</b> UC9
+</p>
+
+<h3>Schedule delivery</h3>
+<p> Scheduler naplánuje objednávku do určité trasy.
+</br><b>Use cases:</b> UC1 UC2 UC6
+</p>
+
+<h3>Get Statistics</h3>
+<p> Systém vyhledá v databázi statistická data a předá je webové aplikaci.
+</br><b>Use cases:</b> UC9
+</p>
+
+<h3>Administer System</h3>
+<p> Administrátor se skrze webové rozhraní přihlásí do systému.
+</br><b>Use cases:</b> 
+</p>
+
+<h3>Create Delivery Route</h3>
+<p> Systém přesně spočítá zadanou trasu v GPS souřadnicích a přepošle ji do
+on-board do zařízení.
+</br><b>Use cases:</b> UC1 UC2 UC3
+</p>
+
+<h3>Confirm Delivery</h3>
+<p> Systém přijímá potvrzení o předání zakázky zákazníkovi.
+</br><b>Use cases:</b> UC1 - UC3
+</p>
+
+<h3>Deliver Cargo</h3>
+<p>On-board aplikace přijímá trasu z centráního systému a zobrazí ji řidiči na
+zařízení</p>
+</p>
+
+<h3>Send Confirmation</h3>
+<p>Řidič zadá potvrzení o předání zakázky. On-board aplikace posílá potvrzení do
+systému.
+</p>
+
+<h3>Manual Delivery</h3>
+<p>Zákazník předá zboží řidiči/přijme zboží od řidiče. Řidič vyství povrzení o
+přijmu/předání.
+</br><b>Use cases:</b> UC1 - UC3
+</p>
+
+<h2> <a name="test" class="anchor" href="#refs">
+<span class="octicon octicon-link"></span></a>Reference</h2>
+
+<p>[<a href="CargoWizard-SRS-Dict-Matrix.pdf">1</a>] CargoWizard - Katalog
+Požadavků </p>
 
       </section>
     </div>
