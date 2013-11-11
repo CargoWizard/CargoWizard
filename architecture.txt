@@ -8,7 +8,7 @@ WebInterface
 ------------
 
 Webové rozhraní je založené na návrhovém vzoru Model-View-Controller. Model
-využívá core modul Core::DB_Accesor (TODO: změnit, až se rozhodnem pro jméno), jehož
+využívá core modul Core::DatabaseManager, jehož
 prostřednictvím získává a modifikuje data z centrální databáze (stylistika!).
 
 Controller řídí logiku celé aplikace, stará se o přihlašování užívatelů,
@@ -23,7 +23,7 @@ Jádro systému je tvořené několika moduly. Core::Scheduler je modul, který 
 vlastní plánování tras. Skrze rozhraní Core::SchedulerPolicy je parametrizovaný
 plánovací politikou, která způsob a jeho rozhodování. 
 
-Dalším modulem je Core::DB_Accessor, který zpřstupňuje ostatním modulům
+Dalším modulem je Core::DatabaseManager, který zpřstupňuje ostatním modulům
 databázi, tím garantuje, že DB bude modifikována pouze definovaným způsobem
 skrze jeho rozhraní.  
 
@@ -36,7 +36,7 @@ a potvrezní doručených zakázek. Data ukládá do databáze.
 
 Klíčovým modulem Core systému je Core::Controller (navzdory jménu zde není na
 MVC kladen takový důraz jako v případě WebInterface), který řídí chování celého
-jádra. Přostřednictvím modulu Core::DB_Accesor komunikuje s databázovým
+jádra. Přostřednictvím modulu Core::DatabaseManager komunikuje s databázovým
 serverem, reaguje na nově zadané zakázky a zadává je plánovači k vyřešení.
 Naplánované zakázky předává nejprve Core::RouteFinderu kvůli spočítání přesné
 trasy a posléze informuje Core::Gateway, aby poslada data konkrétním autům.
