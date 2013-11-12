@@ -32,14 +32,19 @@
 <h1> <a name="cargowizard" class="anchor" href="#cargowizard">
 <span class="octicon octicon-link"></span></a>Popis architektury projektu CargoWizard</h1>
 
-<h2> <a name="team" class="anchor" href="#team">
-<span class="octicon octicon-link"></span></a>Business model</h2>
+<h2> <a name="content" class="anchor">
+<span class="octicon octicon-link"></span></a>Obsah</h2>
+<ul>
+    <li><a href="#logical">Logical View</a></li>
+    <li><a href="#develop">Development View</a></li>
+    <li><a href="#deploy">Deployment View</a></li>
+    <li><a href="#process">Process View</a></li>
+    <li><a href="#usecase">Use Case Model</a></li>
+    <li><a href="#business">Business Model</a></li>
+</ul>
 
-<p>Základní pohled na fungování společnosti.</p>
 
-<img src="images/business_model.png"/>
-
-<h2> <a name="team" class="anchor" href="#team">
+<h2> <a name="logical" class="anchor">
 <span class="octicon octicon-link"></span></a>Logical View</h2>
 
 <p>Logický pohled nabízí zobrazení zákaldní dekompozice celého systému.</p>
@@ -63,13 +68,18 @@ požadavky. WebAppModel poskytuje controlleru data, která získává z core
 systému.
 </p>
 
-<h3>Core Sytem</h3>
+<h3>Core System</h3>
 <p><b>Core</b> slouží jako backend celého sytému, komunikuje s oběma typy
-frontendů (tj. webovou a on-board aplikací) a zprostředková jim přístup do
-databáze. Dále obsahuje modul plánovače tras (Scheduler), kterému předává
-informace o zakázkách a od něj získává plán jejich odbavení. Ten pak předává
-Route Finderu, který už vrací konkrétní trasu. Činnost plánovače je možné
-ovlivňovat výběrem konkrétní plánovací politiky (SchedulingPolicy).</p>
+frontendů (tj. webovou a on-board aplikací) a zprostředkovává jim přístup do
+databáze. Core je interně řízen modulem Controller, který se stará o
+přeposílání dat mezi všemi částmi systému.</p>
+
+<p>Modul pro plánování tras (Scheduler) získává od Controlleru informace o
+nových zakázkách, tyto zpracovává do logistických plánů a posílá je zpět.
+Controller pak nechá spočítat modulem RouteFinder konkrétní trasu, a tu pak
+skrze module On-board Device Controller posílá přímo vozidlům. Činnost
+plánovače je možné ovlivňovat výběrem určité plánovací politiky
+(SchedulingPolicy).</p>
 
 <p>
 Modul RouteFinder je dodaný externí firmou, která se zabývá vývojem navigačních
@@ -77,7 +87,8 @@ systémů a má tedy přístup k detailním mapovým podkladům. Vlastní modul 
 od systému typ vozidla a jeho aktuální polohu, sadu waypointů (míst s
 vyzvednutím či odevzdáním zásilky) a případná omezení na jejich pořadí. Na
 základě těchto údajů spočítá přesnou trasu. Modul garantuje, že trasa bude
-vyhovovat zadanému typu vozidla. </p>
+vyhovovat zadanému typu vozidla. Další funkcí modulu je překlad adres na GPS
+souřadnice. </p>
 
 <h3>On-board Application</h3>
 <p>Aplikace na zařízení komunikuje prostřednictvím zabezpečeného spojení s Core
@@ -88,7 +99,7 @@ programu v daném on-board zařízení. Posledním úkolem této aplikace je
 sledovat aktuální polohu vozidla a ve stanoveném intervalu ji posílat do
 systému.</p>
 
-<h2> <a name="team" class="anchor" href="#team">
+<h2> <a name="develop" class="anchor">
 <span class="octicon octicon-link"></span></a>Development View</h2>
 
 <p>Tento pohled na systém zobrazuje jeho jednotlivé komponenty a vazby
@@ -119,18 +130,19 @@ najetých kilometrech, průměrné spotřebě a trasách, které absolvovaly.
 aktuálních trasách. Ukládá se do ní výstup z Route Finderu. Odtud se také berou
  data trasy, která se posílají do On-board zařízení.</p>
 
-<h2> <a name="test" class="anchor" href="#deploy">
+<h2> <a name="deploy" class="anchor">
 <span class="octicon octicon-link"></span></a>Deployment View</h2>
 
 <a href="https://raw.github.com/CargoWizard/CargoWizard/master/img/DeploymentModel.png">
     <img src="images/DeploymentModel.png"/>
 </a>
 
-<h2> <a name="test" class="anchor" href="#usecase">
+<h2> <a name="process" class="anchor">
 <span class="octicon octicon-link"></span></a>Process View</h2>
 
 <p>(TODO: je potřeba diagram aktivit)</p>
-<h2> <a name="test" class="anchor" href="#usecase">
+
+<h2> <a name="usecase" class="anchor">
 <span class="octicon octicon-link"></span></a>Use Case Model </h2>
 
 <a href="https://raw.github.com/CargoWizard/CargoWizard/master/img/use_case_model.png">
@@ -204,6 +216,13 @@ systému.
 příjmu/předání.
 </br><b>Use cases:</b> UC1 - UC3
 </p>
+
+<h2> <a name="business" class="anchor">
+<span class="octicon octicon-link"></span></a>Business Model</h2>
+
+<p>Základní pohled na fungování společnosti.</p>
+
+<img src="images/business_model.png"/>
 
 <h2> <a name="test" class="anchor" href="#refs">
 <span class="octicon octicon-link"></span></a>Reference</h2>
