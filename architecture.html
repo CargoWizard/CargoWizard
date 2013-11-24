@@ -140,7 +140,29 @@ aktuálních trasách. Ukládá se do ní výstup z Route Finderu. Odtud se tak�
 <h2> <a name="process" class="anchor">
 <span class="octicon octicon-link"></span></a>Process View</h2>
 
-<p>(TODO: je potřeba diagram aktivit)</p>
+<h3>Diagramy aktivit</h3>
+
+<a href="https://raw.github.com/CargoWizard/CargoWizard/master/img/AD_Schedulling.png">
+<img src="images/AD_Schedulling.png"/>
+</a>
+<p>Tento diagram ukazuje, jak probíhá plánování trasy objednávek. Celý tento proces běží jako job na pozadí aplikace.
+<ul>
+	<li>Nejprve se z DB načtou nové objednávky, které ještě nebyly naplánovány.</li>
+	<li>Pokud jsou nějaké, začne jejich plánování podle plánovací politiky.</li>
+	<li>Po naplánování se objednávky uloží a potvrdí, uloží se rovněž i naplánované trasy.</li>	
+</ul>
+</p>
+
+<a href="https://raw.github.com/CargoWizard/CargoWizard/master/img/AD_Delivery.png">
+<img src="images/AD_Delivery.png"/>
+</a>
+<p>Tento diagram ukazuje, jak probíhá vyřizování objednávek z pohledu řidiče/jeho OBD.
+<ul>
+	<li>Poté, co řidič nastoupí do auta, zapne OBD a vyžádá si trasu od systému.</li>
+	<li>Po obdržení trasy a spušnění navigace, řidič vyrazí na cesty. OBD automaticky začne průběžně logovat do systému data o cestě.</li>
+	<li>Řidič může naložit náklad / vyložit náklad / vrátit se zpět, pokud má hotovo.</li>	
+</ul>
+</p>
 
 <h2> <a name="usecase" class="anchor">
 <span class="octicon octicon-link"></span></a>Use Case Model </h2>
